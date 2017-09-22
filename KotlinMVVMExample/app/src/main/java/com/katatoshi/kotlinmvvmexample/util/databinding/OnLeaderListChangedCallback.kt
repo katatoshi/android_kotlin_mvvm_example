@@ -3,9 +3,9 @@ package com.katatoshi.kotlinmvvmexample.util.databinding
 import android.databinding.ObservableList
 
 class OnLeaderListChangedCallback<R, F>(
-        val followerList: MutableList<F>,
-        val onChangedMapper: (R, F) -> F,
-        val onInsertedMapper: (R) -> F
+        private val followerList: MutableList<F>,
+        private val onChangedMapper: (R, F) -> F,
+        private val onInsertedMapper: (R) -> F
 ) : ObservableList.OnListChangedCallback<ObservableList<R>>() {
 
     constructor(
