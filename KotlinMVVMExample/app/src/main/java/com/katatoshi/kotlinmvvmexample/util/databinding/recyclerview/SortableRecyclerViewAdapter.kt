@@ -38,7 +38,7 @@ fun <T> RecyclerView.bindSortable(itemCollection: Collection<T>, variableLayoutP
 }
 
 /**
- * データバインディング対応 RecyclerViewAdapter。セクション分け非対応。
+ * データバインディング対応 RecyclerViewAdapter。並べ替え対応。セクション分け非対応。
  */
 private class SortableRecyclerViewAdapter<T>(
         itemCollection: Collection<T>,
