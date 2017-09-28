@@ -141,7 +141,7 @@ private class SortableRecyclerViewAdapter<T>(
                 // do nothing
             }
 
-            override fun isLongPressDragEnabled(): Boolean = false
+            override fun isLongPressDragEnabled() = false
         })
     }
 
@@ -191,13 +191,9 @@ private class SortableRecyclerViewAdapter<T>(
         holder?.binding?.executePendingBindings()
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return variableLayoutPair.layoutId
-    }
+    override fun getItemViewType(position: Int) = variableLayoutPair.layoutId
 
-    override fun getItemCount(): Int {
-        return itemList.size
-    }
+    override fun getItemCount() = itemList.size
 
     override fun onClick(v: View?) {
         if (onItemClick == null) {

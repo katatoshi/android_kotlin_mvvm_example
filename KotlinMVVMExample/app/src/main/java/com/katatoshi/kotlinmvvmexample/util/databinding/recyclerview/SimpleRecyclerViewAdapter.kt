@@ -53,9 +53,7 @@ private class SimpleRecyclerViewAdapter<T>(
     init {
         onListChangedCallback = object : ObservableList.OnListChangedCallback<ObservableList<T>>() {
 
-            override fun onChanged(sender: ObservableList<T>?) {
-                notifyDataSetChanged()
-            }
+            override fun onChanged(sender: ObservableList<T>?) = notifyDataSetChanged()
 
             override fun onItemRangeChanged(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) {
                 notifyItemRangeChanged(positionStart, itemCount)
@@ -112,13 +110,9 @@ private class SimpleRecyclerViewAdapter<T>(
         holder?.binding?.executePendingBindings()
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return variableLayoutPair.layoutId
-    }
+    override fun getItemViewType(position: Int) = variableLayoutPair.layoutId
 
-    override fun getItemCount(): Int {
-        return itemList.size
-    }
+    override fun getItemCount() = itemList.size
 
     override fun onClick(v: View?) {
         if (onItemClick == null) {
