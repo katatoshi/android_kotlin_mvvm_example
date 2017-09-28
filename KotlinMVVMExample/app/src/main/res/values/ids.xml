@@ -11,6 +11,10 @@
 
     <item
         type="id"
+        name="key_paging_recycler_view_adapter_item" />
+
+    <item
+        type="id"
         name="key_list_divider_item_decoration" />
 
 </resources>

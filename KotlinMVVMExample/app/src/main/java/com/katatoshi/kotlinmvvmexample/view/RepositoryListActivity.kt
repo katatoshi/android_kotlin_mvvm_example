@@ -9,6 +9,7 @@ import com.katatoshi.kotlinmvvmexample.R
 import com.katatoshi.kotlinmvvmexample.databinding.ActivityRepositoryListBinding
 import com.katatoshi.kotlinmvvmexample.util.databinding.recyclerview.VariableLayoutPair
 import com.katatoshi.kotlinmvvmexample.util.databinding.recyclerview.bind
+import com.katatoshi.kotlinmvvmexample.util.databinding.recyclerview.bindPaging
 import com.katatoshi.kotlinmvvmexample.util.databinding.recyclerview.bindSortable
 import com.katatoshi.kotlinmvvmexample.viewmodel.RepositoryListViewModel
 
@@ -27,8 +28,8 @@ class RepositoryListActivity : AppCompatActivity() {
 
         binding.viewModel = viewModel
 
-        binding.recyclerView.bindSortable(viewModel.exampleList, VariableLayoutPair(BR.viewModel, R.layout.item_repository), R.id.text_view_language) {
-            Toast.makeText(this, it.fullName, Toast.LENGTH_SHORT).show()
+        binding.recyclerView.bindPaging(viewModel.exampleList, VariableLayoutPair(BR.viewModel, R.layout.item_repository), viewModel.needPaging) {
+            viewModel.loadPage()
         }
     }
 }
