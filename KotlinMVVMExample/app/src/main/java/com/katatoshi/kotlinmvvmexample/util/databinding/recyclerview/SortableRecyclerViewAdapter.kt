@@ -166,7 +166,7 @@ private class SortableRecyclerViewAdapter<T>(
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         val item = itemList[position]
         holder?.binding?.setVariable(variableLayoutPair.variableId, item)
-        holder?.binding?.root?.setTag(R.id.key_simple_recycler_view_adapter_item, item)
+        holder?.binding?.root?.setTag(R.id.key_sortable_recycler_view_adapter_item, item)
 
         if (onItemClick != null) {
             holder?.binding?.root?.setOnClickListener(this)
