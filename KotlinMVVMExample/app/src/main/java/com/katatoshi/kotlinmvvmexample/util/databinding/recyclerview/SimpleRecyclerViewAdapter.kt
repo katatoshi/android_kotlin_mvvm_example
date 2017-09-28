@@ -18,7 +18,6 @@ fun <T> RecyclerView.bind(itemCollection: Collection<T>, variableLayoutPair: Var
     setAdapter(adapter)
 }
 
-
 /**
  * RecyclerView にコレクション、バインドする変数名 ID とレイアウト ID のペア、クリックリスナーをバインドします。
  */
@@ -26,7 +25,6 @@ fun <T> RecyclerView.bind(itemCollection: Collection<T>, variableLayoutPair: Var
     val adapter = SimpleRecyclerViewAdapter<T>(itemCollection, variableLayoutPair, onItemClick, null)
     setAdapter(adapter)
 }
-
 
 /**
  * RecyclerView にコレクション、バインドする変数名 ID とレイアウト ID のペアをバインドします。

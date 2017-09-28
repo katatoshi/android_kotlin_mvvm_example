@@ -21,7 +21,6 @@ fun <T> RecyclerView.bindSortable(itemCollection: Collection<T>, variableLayoutP
     setAdapter(adapter)
 }
 
-
 /**
  * RecyclerView にコレクション、バインドする変数名 ID とレイアウト ID のペア、並べ替えのハンドラビュー、クリックリスナーをバインドします。
  */
@@ -29,7 +28,6 @@ fun <T> RecyclerView.bindSortable(itemCollection: Collection<T>, variableLayoutP
     val adapter = SortableRecyclerViewAdapter<T>(itemCollection, variableLayoutPair, sortingHandlerViewId, onItemClick, null)
     setAdapter(adapter)
 }
-
 
 /**
  * RecyclerView にコレクション、バインドする変数名 ID とレイアウト ID のペア、並べ替えのハンドラビューをバインドします。
