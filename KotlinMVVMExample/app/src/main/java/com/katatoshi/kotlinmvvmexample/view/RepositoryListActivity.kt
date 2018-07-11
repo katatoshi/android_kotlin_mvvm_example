@@ -1,16 +1,14 @@
 package com.katatoshi.kotlinmvvmexample.view
 
 import android.databinding.DataBindingUtil
+import android.databinding.ObservableArrayList
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.katatoshi.kotlinmvvmexample.BR
 import com.katatoshi.kotlinmvvmexample.R
 import com.katatoshi.kotlinmvvmexample.databinding.ActivityRepositoryListBinding
-import com.katatoshi.kotlinmvvmexample.util.databinding.recyclerview.VariableLayoutPair
-import com.katatoshi.kotlinmvvmexample.util.databinding.recyclerview.bind
-import com.katatoshi.kotlinmvvmexample.util.databinding.recyclerview.bindPaging
-import com.katatoshi.kotlinmvvmexample.util.databinding.recyclerview.bindSortable
+import com.katatoshi.kotlinmvvmexample.util.databinding.recyclerview.*
 import com.katatoshi.kotlinmvvmexample.viewmodel.RepositoryListViewModel
 
 class RepositoryListActivity : AppCompatActivity() {
@@ -28,8 +26,10 @@ class RepositoryListActivity : AppCompatActivity() {
 
         binding.viewModel = viewModel
 
-        binding.recyclerView.bindPaging(viewModel.exampleList, VariableLayoutPair(BR.viewModel, R.layout.item_repository), viewModel.needPaging) {
-            viewModel.loadPage()
-        }
+        binding.recyclerView.bindSectionBinderList(listOf(
+                SectionBinder(Section("header 1", viewModel.exampleList), VariableLayoutPair(BR.viewModel, R.layout.item_header), VariableLayoutPair(BR.viewModel, R.layout.item_repository)),
+                SectionBinder(Section("header 2", viewModel.exampleList), VariableLayoutPair(BR.viewModel, R.layout.item_header), VariableLayoutPair(BR.viewModel, R.layout.item_repository)),
+                SectionBinder(Section("header 3", viewModel.exampleList), VariableLayoutPair(BR.viewModel, R.layout.item_header), VariableLayoutPair(BR.viewModel, R.layout.item_repository))
+        ))
     }
 }
