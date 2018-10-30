@@ -145,39 +145,39 @@ private class SortableRecyclerViewAdapter<T>(
         })
     }
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
 
         itemSortingHelper.attachToRecyclerView(recyclerView)
     }
 
-    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView?) {
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         itemList.removeOnListChangedCallback(onListChangedCallback)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         if (inflater == null) {
-            inflater = LayoutInflater.from(parent?.context)
+            inflater = LayoutInflater.from(parent.context)
         }
 
-        return ViewHolder(DataBindingUtil.inflate(inflater, viewType, parent, false))
+        return ViewHolder(DataBindingUtil.inflate(inflater!!, viewType, parent, false))
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = itemList[position]
-        holder?.binding?.setVariable(variableLayoutPair.variableId, item)
-        holder?.binding?.root?.setTag(R.id.key_sortable_recycler_view_adapter_item, item)
+        holder.binding.setVariable(variableLayoutPair.variableId, item)
+        holder.binding.root.setTag(R.id.key_sortable_recycler_view_adapter_item, item)
 
         if (onItemClick != null) {
-            holder?.binding?.root?.setOnClickListener(this)
+            holder.binding.root.setOnClickListener(this)
         }
 
         if (onItemLongClick != null) {
-            holder?.binding?.root?.setOnLongClickListener(this)
+            holder.binding.root.setOnLongClickListener(this)
         }
 
-        holder?.binding?.root?.findViewById<View>(sortingHandlerViewId)?.let { sortingHandlerView ->
-            sortingHandlerView.setOnTouchListener { v, event ->
+        holder.binding.root.findViewById<View>(sortingHandlerViewId).let { sortingHandlerView ->
+            sortingHandlerView.setOnTouchListener { _, event ->
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
                         itemSortingHelper.startDrag(holder)
@@ -188,7 +188,7 @@ private class SortableRecyclerViewAdapter<T>(
             }
         }
 
-        holder?.binding?.executePendingBindings()
+        holder.binding.executePendingBindings()
     }
 
     override fun getItemViewType(position: Int) = variableLayoutPair.layoutId

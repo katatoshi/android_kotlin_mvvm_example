@@ -105,12 +105,12 @@ private class PagingRecyclerViewAdapter<T>(
         }
     }
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
 
         //region ページング実装
         // ref. http://stackoverflow.com/questions/36127734/detect-when-recyclerview-reaches-the-bottom-most-position-while-scrolling
-        recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(r: RecyclerView?, dx: Int, dy: Int) {
                 (recyclerView.layoutManager as? LinearLayoutManager)?.let {
@@ -127,37 +127,37 @@ private class PagingRecyclerViewAdapter<T>(
         //endregion
     }
 
-    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView?) {
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         itemList.removeOnListChangedCallback(onListChangedCallback)
 
         progressBarEnabled.removeOnPropertyChangedCallback(onProgressBarEnabledPropertyChangedCallback)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         if (inflater == null) {
-            inflater = LayoutInflater.from(parent?.context)
+            inflater = LayoutInflater.from(parent.context)
         }
 
-        return ViewHolder(DataBindingUtil.inflate(inflater, viewType, parent, false))
+        return ViewHolder(DataBindingUtil.inflate(inflater!!, viewType, parent, false))
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (position < itemList.size) {
             // プログレスバー表示用のアイテム以外ならば、variable や listener などをセットする。
             val item = itemList[position]
-            holder?.binding?.setVariable(variableLayoutPair.variableId, item)
-            holder?.binding?.root?.setTag(R.id.key_simple_recycler_view_adapter_item, item)
+            holder.binding.setVariable(variableLayoutPair.variableId, item)
+            holder.binding.root.setTag(R.id.key_simple_recycler_view_adapter_item, item)
 
             if (onItemClick != null) {
-                holder?.binding?.root?.setOnClickListener(this)
+                holder.binding.root.setOnClickListener(this)
             }
 
             if (onItemLongClick != null) {
-                holder?.binding?.root?.setOnLongClickListener(this)
+                holder.binding.root.setOnLongClickListener(this)
             }
         }
 
-        holder?.binding?.executePendingBindings()
+        holder.binding.executePendingBindings()
     }
 
     override fun getItemViewType(position: Int) = if (position < itemList.size) variableLayoutPair.layoutId else R.layout.item_progress_bar
